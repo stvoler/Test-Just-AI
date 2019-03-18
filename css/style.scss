@@ -1,0 +1,494 @@
+$font1: 'SourceSansPro-Regular';
+$font2: 'SourceSansPro-Black';
+$font3: 'SourceSansPro-Semibold';
+
+@font-face {
+	font-family: $font1;
+	src: url('../fonts/SourceSansPro-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/SourceSansPro-Regular.otf') format('opentype'), url('../fonts/SourceSansPro-Regular.woff') format('woff'), url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: $font2;
+	src: url('../fonts/SourceSansPro-Black.eot?#iefix') format('embedded-opentype'), url('../fonts/SourceSansPro-Black.otf') format('opentype'), url('../fonts/SourceSansPro-Black.woff') format('woff'), url('../fonts/SourceSansPro-Black.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: $font3;
+	src: url('../fonts/SourceSansPro-Semibold.eot?#iefix') format('embedded-opentype'), url('../fonts/SourceSansPro-Semibold.otf') format('opentype'), url('../fonts/SourceSansPro-Semibold.woff') format('woff'), url('../fonts/SourceSansPro-Semibold.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@mixin center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+@mixin ball {
+	@include center;
+	content: '';
+	display: block;
+	width: 3px;
+	height: 3px;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, .8);
+	z-index: 2;
+	margin-top: 4px;
+	animation: ball .45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	font-family: $font1, sans-serif;
+	font-size: 12px;
+	line-height: 1.3;
+	overflow: hidden;
+}
+
+h1,
+h2 {
+	font-family: $font2;
+	font-weight: normal;
+	letter-spacing: 0.9px;
+	margin: 0 0 20px 0;
+}
+
+h2 {
+	font-size: 25px;
+}
+
+p {
+	font-size: 15px;
+	line-height: 18px;
+	letter-spacing: 0.11px;
+	margin: 0 0 18px 0;
+}
+
+ul {
+	li {
+		list-style: none;
+	}
+}
+
+.center {
+	height: 100vh;
+	margin: 0 auto;
+	width: 1170px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+nav {
+	font: 16px $font3;
+	width: 13%;
+
+	ul {
+		padding: 0;
+
+		li {
+			margin: 20px 0;
+
+			&.active {
+				font-family: $font2;
+				border-bottom: 2px solid #187ECF;
+			}
+		}
+	}
+}
+
+.chat {
+	width: 81%;
+	max-width: 1000px;
+	height: 80vh;
+	max-height: 675px;
+	z-index: 2;
+	overflow: hidden;
+	background: #333333;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	padding: 40px 63px;
+
+	h2,
+	p {
+		max-width: 590px;
+	}
+}
+
+.chat-title {
+	flex: 0 1 45px;
+	position: relative;
+	z-index: 2;
+	background: rgba(0, 0, 0, 0.2);
+	color: #fff;
+	text-transform: uppercase;
+	text-align: left;
+	padding: 10px 10px 10px 50px;
+
+	h1,
+	h2 {
+		font-weight: normal;
+		font-size: 10px;
+		margin: 0;
+		padding: 0;
+	}
+
+	h2 {
+		color: rgba(255, 255, 255, .5);
+		font-size: 8px;
+		letter-spacing: 1px;
+	}
+
+	.avatar {
+		position: absolute;
+		z-index: 1;
+		top: 8px;
+		left: 9px;
+		border-radius: 30px;
+		width: 30px;
+		height: 30px;
+		overflow: hidden;
+		margin: 0;
+		padding: 0;
+		border: 2px solid rgba(255, 255, 255, 0.24);
+
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
+}
+
+.messages {
+	flex: 1 1 auto;
+	color: white;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	max-width: 600px;
+	margin: 23px 0 0 0;
+
+	& .messages-content {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 101%;
+		width: 100%;
+	}
+
+
+	.message {
+		clear: both;
+		float: left;
+		padding: 6px 10px 7px;
+		border-radius: 10px 10px 10px 0;
+		background: #F0F0F0;
+		margin: 8px 0;
+		font-size: 12px;
+		line-height: 1.4;
+		margin-left: 53px;
+		position: relative;
+		color: black;
+		max-width: 300px;
+
+		.timestamp {
+			position: absolute;
+			bottom: -15px;
+			font-size: 9px;
+			color: rgba(255, 255, 255, .3);
+		}
+
+		&:before {
+			content: '';
+			position: absolute;
+			bottom: -5px;
+			border-top: 8px solid #f0f0f0;
+			left: -1px;
+			border-right: 11px solid transparent;
+			transform: rotate(20deg);
+		}
+
+		.avatar {
+			position: absolute;
+			z-index: 1;
+			bottom: -15px;
+			left: -63px;
+			border-radius: 30px;
+			width: 46px;
+			height: 46px;
+			overflow: hidden;
+			margin: 0;
+			padding: 3px 6px 10px 6px;
+			border: 2px solid rgba(255, 255, 255, 0.24);
+			background: white;
+
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+
+		&.message-personal {
+			float: right;
+			color: #fff;
+			text-align: right;
+			background: linear-gradient(120deg, #4EA7EC, #187ECF);
+			border-radius: 10px 10px 0 10px;
+			margin-right: 53px;
+
+			&::before {
+				left: auto;
+				right: -1px;
+				border-right: none;
+				border-left: 11px solid transparent;
+				border-top: 8px solid #1d81d1;
+				bottom: -5px;
+				transform: rotate(-20deg);
+			}
+
+			.avatar {
+				right: -63px;
+				left: unset;
+			}
+		}
+
+		&:last-child {
+			margin-bottom: 30px;
+		}
+
+		&.new {
+			transform: scale(0);
+			transform-origin: 0 0;
+			animation: bounce 500ms linear both;
+		}
+
+		&.loading {
+
+			&::before {
+				@include ball;
+				border: none;
+				animation-delay: .15s;
+			}
+
+			& span {
+				display: block;
+				font-size: 0;
+				width: 20px;
+				height: 10px;
+				position: relative;
+
+				&::before {
+					@include ball;
+					margin-left: -7px;
+				}
+
+				&::after {
+					@include ball;
+					margin-left: 7px;
+					animation-delay: .3s;
+				}
+			}
+		}
+
+	}
+}
+
+.message-box {
+	flex: 0 1 40px;
+	width: 100%;
+	max-width: 600px;
+	background: rgba(0, 0, 0, 0.3);
+	padding: 10px;
+	position: relative;
+	border-radius: 10px;
+
+	& .message-input {
+		background: none;
+		border: none;
+		outline: none !important;
+		resize: none;
+		color: rgba(255, 255, 255, .7);
+		font-size: 12px;
+		height: 20px;
+		margin: 0;
+		padding-right: 20px;
+		width: 80%;
+		font-family: $font1;
+	}
+
+	textarea:focus:-webkit-placeholder {
+		color: transparent;
+	}
+
+	& .message-submit {
+		position: absolute;
+		z-index: 1;
+		top: 9px;
+		right: 10px;
+		color: #fff;
+		border: none;
+		background: linear-gradient(120deg, #4EA7EC, #187ECF);
+		font-size: 10px;
+		text-transform: uppercase;
+		line-height: 1;
+		padding: 6px 10px;
+		border-radius: 10px;
+		outline: none !important;
+		cursor: pointer;
+		transition: .2s ease;
+
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+}
+
+
+.mCSB_scrollTools {
+	margin: 1px -3px 1px 0;
+	opacity: 0;
+}
+
+.mCSB_inside > .mCSB_container {
+	margin-right: 0px;
+	padding: 0 10px;
+}
+
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+@keyframes bounce {
+	0% {
+		transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+
+	4.7% {
+		transform: matrix3d(0.45, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+
+	9.41% {
+		transform: matrix3d(0.883, 0, 0, 0, 0, 0.883, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+
+	14.11% {
+		transform: matrix3d(1.141, 0, 0, 0, 0, 1.141, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+
+	18.72% {
+		transform: matrix3d(1.212, 0, 0, 0, 0, 1.212, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+
+	24.32% {
+		transform: matrix3d(1.151, 0, 0, 0, 0, 1.151, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+
+	29.93% {
+		transform: matrix3d(1.048, 0, 0, 0, 0, 1.048, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+
+	35.54% {
+		transform: matrix3d(0.979, 0, 0, 0, 0, 0.979, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+
+	41.04% {
+		transform: matrix3d(0.961, 0, 0, 0, 0, 0.961, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+
+	52.15% {
+		transform: matrix3d(0.991, 0, 0, 0, 0, 0.991, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+
+	63.26% {
+		transform: matrix3d(1.007, 0, 0, 0, 0, 1.007, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+
+	85.49% {
+		transform: matrix3d(0.999, 0, 0, 0, 0, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+
+	100% {
+		transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	}
+}
+
+
+@keyframes ball {
+	from {
+		transform: translateY(0) scaleY(.8);
+	}
+
+	to {
+		transform: translateY(-10px);
+	}
+}
+
+@media (max-width:1170px) {
+	.center {
+		width: 100%;
+	}
+
+	nav {
+		width: 20%;
+	}
+
+	.chat {
+		width: 75%;
+	}
+}
+
+@media (max-width:810px) {
+	body{
+		background: #333333;
+	}
+	.center {
+		flex-wrap: wrap;
+		padding: 23px;
+		overflow: hidden;
+	}
+
+	nav,
+	.chat {
+		width: 100%;
+	}
+
+	nav {
+		ul {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: flex-start;
+
+			li {
+				white-space: nowrap;
+				margin-right: 18px;
+				color: white;
+			}
+		}
+	}
+	.chat{
+		padding: 0;
+		h2,p{
+			display: none;
+		}
+	}
+}
